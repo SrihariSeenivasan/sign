@@ -1,24 +1,21 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:sign/screen/login.dart';
 
 Future<void> main() async {
-  //if the app is web application
+  // Ensure that Flutter's widget binding is initialized
   WidgetsFlutterBinding.ensureInitialized();
-  if (kIsWeb) {
-    await Firebase.initializeApp(
-        options: FirebaseOptions(
-            apiKey: "AIzaSyAUEFgLa88zOzDBvsupyZ3vuUki_ZSODqE",
-            authDomain: "sign-38ab7.firebaseapp.com",
-            projectId: "sign-38ab7",
-            storageBucket: "sign-38ab7.appspot.com",
-            messagingSenderId: "1093457445685",
-            appId: "1:1093457445685:web:3e91bddc8e055a7020c27c"));
-  } else {
-    await Firebase.initializeApp();
-  }
-//auth
+
+  // Initialize Firebase
+  await Firebase.initializeApp(
+      options: FirebaseOptions(
+          apiKey: "AIzaSyCeqjJ7EMMVj74guOTM3_yfkWMcj9WEVlE",
+          appId: "1:1093457445685:android:525ba9bdbf3247cc20c27c",
+          messagingSenderId: "1093457445685",
+          projectId: "sign-38ab7"));
+
+  // Run the app
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -27,11 +24,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
-          useMaterial3: true,
-        ),
-        home: LoginPage());
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
+        useMaterial3: true,
+      ),
+      home: LoginPage(),
+    );
   }
 }

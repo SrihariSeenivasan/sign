@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart'; // Ensure you import this
 import 'package:flutter/material.dart';
 import 'package:sign/auth/auth.dart';
 import 'package:sign/home.dart';
@@ -15,27 +16,19 @@ class _SigninState extends State<Signin> {
   final _auth = AuthService();
 
   // Controllers
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    super.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+  }
 
   // Method to navigate to Home page
-  void gotoHome(BuildContext context) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
-  }
 
   // Signin function
-  Future<void> _signin() async {
-    try {
-      final user = await _auth.createUserWithEmailAndPassword(
-          _emailController.text, _passwordController.text);
-      if (user != null) {
-        print("User created successfully");
-        gotoHome(context);
-      }
-    } catch (e) {
-      print("Error: $e");
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +91,7 @@ class _SigninState extends State<Signin> {
                                     },
                                     child: Text("Login "))
                               ],
-                            )
+                            ),
                           ],
                         ),
                       ),
@@ -112,4 +105,25 @@ class _SigninState extends State<Signin> {
       ),
     );
   }
+
+  _signin() async {
+    try {
+      // Ensure Firebase is initialized before calling any Firebase services
+      await Firebase.initializeApp();
+
+      final user = await _auth.createUserWithEmailAndPassword(
+          _emailController.text, _passwordController.text);
+      if (user != null) {
+        print("User created successfully");
+        gotoHome(context);
+      }
+    } catch (e) {
+      print("Error: $e");
+      // You can show a dialog to the user if something goes wrong
+    }
+  }
+}
+
+gotoHome(BuildContext context) {
+  Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
 }
