@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:sign/screen/login.dart';
+import 'package:sign/wrapper.dart';
 
 Future<void> main() async {
   // Ensure that Flutter's widget binding is initialized
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         useMaterial3: true,
       ),
-      home: LoginPage(),
+      home: Wrapper(),
     );
   }
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sign/auth/auth.dart';
-import 'package:sign/screen/login.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -113,7 +112,6 @@ class _HomeState extends State<Home> {
                         ElevatedButton(
                             onPressed: () async {
                               await _auth.signout();
-                              gotoLogin(context);
                             },
                             child: Text("Sign_out"))
                       ],
@@ -126,7 +124,8 @@ class _HomeState extends State<Home> {
     );
   }
 }
+//we don't need this manual navigation because wrapper class manage it by signout state
 
-gotoLogin(BuildContext context) {
-  Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
-}
+// gotoLogin(BuildContext context) {
+//   Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
+// }

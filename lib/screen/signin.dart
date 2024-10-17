@@ -111,12 +111,9 @@ class _SigninState extends State<Signin> {
       // Ensure Firebase is initialized before calling any Firebase services
       await Firebase.initializeApp();
 
-      final user = await _auth.createUserWithEmailAndPassword(
+      await _auth.createUserWithEmailAndPassword(
           _emailController.text, _passwordController.text);
-      if (user != null) {
-        print("User created successfully");
-        gotoHome(context);
-      }
+      Navigator.pop(context);
     } catch (e) {
       print("Error: $e");
       // You can show a dialog to the user if something goes wrong

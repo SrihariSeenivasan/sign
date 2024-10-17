@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sign/auth/auth.dart';
-import 'package:sign/home.dart';
 import 'package:sign/method/textfieldmethod.dart';
 import 'package:sign/screen/forgotpass.dart';
 import 'package:sign/screen/signin.dart';
@@ -124,15 +123,8 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  gotoHome(BuildContext context) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
-  }
-
   _login() async {
-    final user = await _auth.loginUserWithEmailAndPassword(
+    await _auth.loginUserWithEmailAndPassword(
         _emailController.text, _passwordController.text);
-    if (user != null) {
-      gotoHome(context);
-    }
   }
 }
