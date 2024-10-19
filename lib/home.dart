@@ -33,50 +33,24 @@ class _HomeState extends State<Home> {
                 child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Container(
-                        height: 75,
-                        width: 85,
-                        color: Colors.black,
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Container(
-                        height: 75,
-                        width: 85,
-                        color: Colors.black,
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Container(
-                        height: 75,
-                        width: 85,
-                        color: Colors.black,
+                      Padding(padding: EdgeInsets.all(10)),
+                      GestureDetector(
+                        child: Container(
+                          height: 75,
+                          width: 85,
+                          decoration: BoxDecoration(
+                              color: Colors.black,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5)),
+                              image: DecorationImage(
+                                  image:
+                                      AssetImage("assets/page_img/login.png"),
+                                  fit: BoxFit.cover)),
+                        ),
                       ),
                       SizedBox(
-                        width: 20,
-                      ),
-                      Container(
-                        height: 75,
-                        width: 85,
-                        color: Colors.black,
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Container(
-                        height: 75,
-                        width: 85,
-                        color: Colors.black,
-                      ),
-                      SizedBox(
-                        width: 20,
+                        width: 10,
                       ),
                       GestureDetector(
                         child: Container(

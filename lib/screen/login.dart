@@ -13,6 +13,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _auth = AuthService();
+  bool isLoading = false;
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
@@ -60,57 +61,96 @@ class _LoginPageState extends State<LoginPage> {
                   child: Center(
                     child: Padding(
                       padding: const EdgeInsets.all(15.0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          textfieldmethod("Enter your email", "E-mail",
-                              Icons.person, false, _emailController),
-                          SizedBox(height: 20),
-                          textfieldmethod("Enter your Password", "Password",
-                              Icons.password, true, _passwordController),
-                          SizedBox(height: 20),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              TextButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                Forgotpass()));
-                                  },
-                                  child: Text(
-                                    " Forgot password ?",
-                                    style: TextStyle(
-                                      color: Colors.blueGrey,
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            textfieldmethod("Enter your email", "E-mail",
+                                Icons.person, false, _emailController),
+                            SizedBox(height: 20),
+                            textfieldmethod("Enter your Password", "Password",
+                                Icons.password, true, _passwordController),
+                            SizedBox(height: 20),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                TextButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  Forgotpass()));
+                                    },
+                                    child: Text(
+                                      " Forgot password ?",
+                                      style: TextStyle(
+                                        color: Colors.blueGrey,
+                                      ),
+                                    )),
+                              ],
+                            ),
+                            SizedBox(height: 5),
+                            ElevatedButton(
+                              onPressed: () {
+                                _login();
+                              },
+                              child: Text("   Login   "),
+                            ),
+                            isLoading
+                                ? const CircularProgressIndicator()
+                                : OutlinedButton(
+                                    onPressed: () async {
+                                      setState(() {
+                                        isLoading = true;
+                                      });
+                                      await _auth.loginWithGoogle();
+                                      setState(() {
+                                        isLoading = false;
+                                      });
+                                    },
+                                    style: OutlinedButton.styleFrom(
+                                      side: BorderSide(
+                                          color: Colors
+                                              .blueGrey), // Optional: custom border color
                                     ),
-                                  )),
-                            ],
-                          ),
-                          SizedBox(height: 20),
-                          ElevatedButton(
-                            onPressed: () {
-                              _login();
-                            },
-                            child: Text("   Login   "),
-                          ),
-                          SizedBox(height: 20),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("Don't have account !"),
-                              TextButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => Signin()));
-                                  },
-                                  child: Text("Sign in "))
-                            ],
-                          )
-                        ],
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize
+                                          .min, // Keep the button compact
+                                      children: [
+                                        Image.asset(
+                                          'assets/logo/google.png', // Replace with the path to your image
+                                          height:
+                                              12.0, // Set the size of the image
+                                        ),
+                                        SizedBox(
+                                            width:
+                                                8.0), // Add some space between image and text
+                                        Text(
+                                          "Continue with Google",
+                                          style:
+                                              TextStyle(color: Colors.blueGrey),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                            SizedBox(height: 5),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text("Don't have account !"),
+                                TextButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => Signin()));
+                                    },
+                                    child: Text("Sign in "))
+                              ],
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),
