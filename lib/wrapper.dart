@@ -24,7 +24,10 @@ class Wrapper extends StatelessWidget {
             if (snapshot.data == null) {
               return const LoginPage();
             } else {
-              return const Home();
+              if (snapshot.data?.emailVerified == true) {
+                return Home();
+              }
+              return Home();
             }
           }
         },
