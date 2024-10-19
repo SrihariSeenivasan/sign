@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:sign/auth/auth.dart';
 
 class VerificationScreen extends StatefulWidget {
-  const VerificationScreen({super.key});
+  const VerificationScreen({super.key, required User user});
 
   @override
   State<VerificationScreen> createState() => _VerificationScreenState();

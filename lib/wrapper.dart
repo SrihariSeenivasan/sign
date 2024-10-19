@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:sign/auth/verification.dart';
 import 'package:sign/home.dart';
 import 'package:sign/screen/login.dart';
 
@@ -24,10 +25,12 @@ class Wrapper extends StatelessWidget {
             if (snapshot.data == null) {
               return const LoginPage();
             } else {
-              if (snapshot.data?.emailVerified == true) {
+              if (snapshot.data!.emailVerified == true) {
                 return Home();
               }
-              return Home();
+              return VerificationScreen(
+                user: snapshot.data!,
+              );
             }
           }
         },
